@@ -1,0 +1,15 @@
+node_modules/
+.next/
+dist/
+out/
+build/
+*.log
+.env
+.env.local
+.env.*.local
+.DS_Store
+coverage/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/

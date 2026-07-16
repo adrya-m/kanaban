@@ -1,25 +1,53 @@
-# Kanban Project Manager
+# Sundance Renovations
 
-## Instructions
+Kanban boards for renovations and Europe vacation planning (Next.js + optional Supabase).
 
-This is a skeleton project to be the basis for your Kanban project for Week 1 of the Complete AI Coder Course. See the course resources for more.
+## Setup
 
-You should clone this repo within your projects directory with:
+```bash
+cd frontend
+npm install
+cp .env.example .env.local
+```
 
-`git clone https://github.com/ed-donner/kanban.git`
+## Database (Supabase, no login)
 
-And then refine the AGENTS.md before using in your Coding Agent of choice.
+1. Create a free project at [supabase.com](https://supabase.com).
+2. Open **SQL Editor**, paste and run [`frontend/supabase/schema.sql`](frontend/supabase/schema.sql).
+3. Go to **Project Settings → API** and copy:
+   - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
+   - `anon` `public` key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+4. Put both values in `frontend/.env.local`.
+5. Restart `npm run dev`.
 
-If you don't have git installed, you can [install it here](https://git-scm.com/install/) and you might need to reboot afterwards.
+When env vars are set, both boards sync to Supabase (any device using the same project shares the same data). Without env vars, the app falls back to browser storage.
 
-## Contributing your AGENTS.md
+**Security note:** No login means anyone who has your site URL (and the public anon key in the frontend) can read and edit the boards. Fine for a personal MVP; add login later if you need private data.
 
-If you have suggested AGENTS.md changes that have worked well for you, please contribute them to benefit other students! Follow the instructions linked [here](https://edwarddonner.com/pr) to raise a PR to put it in community_contributions. Name your file something like ED_DONNER_AGENTS.md but with your name..
+## Development
 
-I can't wait to see your changes.
+```bash
+npm run dev
+```
 
-## Posting your app
+Open [http://localhost:3000](http://localhost:3000).
 
-When you've successfully built a Kanban app, if you'd like to post about it on LinkedIn and tag me, then I'll weigh in to amplify your success and draw more attention to your achievements.
+## Testing
 
-If you see other students doing this, please weigh in yourself to add your support and encouragement. It's so helpful for the community if we support each other.
+```bash
+npm test          # unit tests (uses local storage fallback)
+npm run test:e2e  # Playwright e2e tests
+```
+
+## Production / Vercel
+
+1. Deploy the `frontend` folder to Vercel.
+2. In Vercel → Project → Settings → Environment Variables, add the same two `NEXT_PUBLIC_SUPABASE_*` values.
+3. Redeploy.
+
+## Production (local)
+
+```bash
+npm run build
+npm start
+```

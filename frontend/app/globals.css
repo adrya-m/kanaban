@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light: warm linen + desert gold (Sundance renovation feel) */
+:root {
+  --background: #f7f4ef;
+  --foreground: #1c2b3a;
+  --surface: #ffffff;
+  --surface-muted: #faf8f5;
+  --border: #e2ddd4;
+  --color-accent: #c8871a;
+  --color-primary: #2a7a8c;
+  --color-secondary: #7a4e2a;
+  --color-navy: #1c2b3a;
+  --color-gray: #6b7280;
+}
+
+/* Dark: charcoal slate with brighter gold/teal accents */
+.dark {
+  color-scheme: dark;
+  --background: #111820;
+  --foreground: #eef2f6;
+  --surface: #1a2430;
+  --surface-muted: #1e2a38;
+  --border: #2d3a4a;
+  --color-accent: #e8b84a;
+  --color-primary: #4db8d8;
+  --color-secondary: #c49a6c;
+  --color-navy: #eef2f6;
+  --color-gray: #8b9cb3;
+}
+
+/* Vacations in Europe: Mediterranean palette */
+[data-board="vacations-europe"] {
+  --color-accent: #c45c26;
+  --color-primary: #1e6b8c;
+  --color-secondary: #2d6a4f;
+}
+
+[data-board="vacations-europe"].dark {
+  --color-accent: #e07a45;
+  --color-primary: #4da3c4;
+  --color-secondary: #52b788;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-accent: var(--color-accent);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-navy: var(--color-navy);
+  --color-gray: var(--color-gray);
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-drop-in {
+  animation: drop-in 0.2s ease-out;
+}
