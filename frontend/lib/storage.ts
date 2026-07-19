@@ -162,9 +162,10 @@ async function loadFromSupabase(): Promise<StoredState | null> {
   }
 
   if (!boardRows || boardRows.length === 0) {
-    const fresh = getFreshState();
-    await saveToSupabase(fresh);
-    return fresh;
+    // Prefer uploading this device's existing boards over default dummy data
+    const local = loadLocalState() ?? getFreshState();
+    await saveToSupabase(local);
+    return local;
   }
 
   const boards = { ...getFreshState().boards };
